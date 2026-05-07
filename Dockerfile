@@ -20,6 +20,7 @@ WORKDIR /app
 ENV NODE_ENV=production
 ENV DATABASE_URL="file:/data/app.db"
 ENV AUTH_SECRET="forge-app-default-secret-override-in-production"
+ENV AUTH_TRUST_HOST=true
 ENV NEXT_PUBLIC_APP_URL=""
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
