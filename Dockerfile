@@ -34,4 +34,4 @@ USER nextjs
 EXPOSE 3000
 ENV PORT=3000
 ENV HOSTNAME=0.0.0.0
-CMD ["sh", "-c", "HOSTNAME=0.0.0.0 exec node server.js"]
+CMD ["sh", "-c", "node node_modules/prisma/build/index.js db push --skip-generate && echo 'DB ready' && HOSTNAME=0.0.0.0 exec node server.js"]
