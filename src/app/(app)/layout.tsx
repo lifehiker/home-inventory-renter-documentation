@@ -10,7 +10,7 @@ export default async function AppLayout({
 }) {
   const session = await auth();
   if (!session?.user) {
-    redirect("/login");
+    redirect("/");
   }
 
   const isPro = session.user.proUnlocked;
