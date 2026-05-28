@@ -12,7 +12,6 @@ function createPrismaClient() {
   const adapter = new PrismaLibSql({ url: dbUrl });
 
   return new PrismaClient({
-    adapter: new PrismaBetterSqlite3({ url: process.env.DATABASE_URL ?? "file:./dev.db" }),
     adapter,
     log: ["error"],
   });
