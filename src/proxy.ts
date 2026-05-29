@@ -11,7 +11,7 @@ export async function proxy(req: NextRequest) {
   );
 
   if (isProtected && !session?.user) {
-    return NextResponse.redirect(new URL("/login", req.url));
+    return NextResponse.redirect(new URL("/", req.url));
   }
 
   return NextResponse.next();
