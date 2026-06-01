@@ -1,5 +1,4 @@
 import { auth } from "@/auth";
-import { redirect } from "next/navigation";
 import Link from "next/link";
 import { SignOutButton } from "@/components/SignOutButton";
 
@@ -9,11 +8,7 @@ export default async function AppLayout({
   children: React.ReactNode;
 }) {
   const session = await auth();
-  if (!session?.user) {
-    redirect("/");
-  }
-
-  const isPro = session.user.proUnlocked;
+  const isPro = session?.user?.proUnlocked ?? false;
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
@@ -56,7 +51,7 @@ export default async function AppLayout({
               </Link>
             )}
             <span className="text-sm text-gray-600 hidden sm:block">
-              {session.user.name || session.user.email}
+              {session?.user?.name || session?.user?.email}
             </span>
             <SignOutButton />
           </div>

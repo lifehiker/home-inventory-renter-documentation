@@ -1,5 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "DepositSafe — Free Home Inventory App, No PDF Paywall",
@@ -7,7 +9,11 @@ export const metadata: Metadata = {
     "Document your rental property with GPS-timestamped photos. Free PDF export forever — no $49/year paywall like Sortly. Room-by-room documentation for security deposit disputes.",
 };
 
-export default function HomePage() {
+export default async function HomePage() {
+  const session = await auth();
+  if (session?.user) {
+    redirect("/dashboard");
+  }
   return (
     <div className="min-h-screen bg-white">
       {/* Nav */}
