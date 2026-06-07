@@ -1,4 +1,5 @@
 import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 import Link from "next/link";
 import { SignOutButton } from "@/components/SignOutButton";
 
@@ -8,7 +9,8 @@ export default async function AppLayout({
   children: React.ReactNode;
 }) {
   const session = await auth();
-  const isPro = session?.user?.proUnlocked ?? false;
+  if (!session?.user) redirect("/login");
+  const isPro = session.user.proUnlocked ?? false;
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
