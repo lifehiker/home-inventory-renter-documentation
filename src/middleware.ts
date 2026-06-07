@@ -1,12 +1,9 @@
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+import NextAuth from "next-auth";
+import { authConfig } from "./auth.config";
 
-// Auth is handled at the page level (Node.js runtime) to avoid Edge/JWT
-// verification mismatch when the full auth.ts config (bcrypt, Credentials
-// provider) is evaluated in Edge.
-export function middleware(_request: NextRequest) {
-  return NextResponse.next();
-}
+// Use Edge-compatible authConfig (no bcrypt/Prisma) so JWT verification
+// works in Edge runtime and the 307 redirect fires before any HTML streams.
+export default NextAuth(authConfig).auth;
 
 export const config = {
   matcher: ["/dashboard/:path*", "/properties/:path*"],
