@@ -8,6 +8,8 @@ export const authConfig = {
   pages: {
     signIn: "/login",
   },
-  callbacks: {},
+  callbacks: {
+    authorized: () => true,
+  },
   providers: [],
 } satisfies NextAuthConfig;
