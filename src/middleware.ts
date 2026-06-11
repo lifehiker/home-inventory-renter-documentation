@@ -1,9 +1,10 @@
-import NextAuth from "next-auth";
-import { authConfig } from "./auth.config";
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 
-// Use Edge-compatible authConfig (no bcrypt/Prisma) so JWT verification
-// works in Edge runtime and the 307 redirect fires before any HTML streams.
-export default NextAuth(authConfig).auth;
+// Auth is handled by (app)/layout.tsx — no middleware wrapper needed.
+export function middleware(_request: NextRequest) {
+  return NextResponse.next();
+}
 
 export const config = {
   matcher: ["/dashboard/:path*", "/properties/:path*"],
