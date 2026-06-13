@@ -9,7 +9,7 @@ export default async function AppLayout({
   children: React.ReactNode;
 }) {
   const session = await auth();
-  if (!session?.user) redirect("/");
+  if (!session?.user) redirect("/login");
   const isPro = session.user.proUnlocked ?? false;
 
   return (
