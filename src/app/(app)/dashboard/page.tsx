@@ -11,7 +11,7 @@ export default async function DashboardPage({
   searchParams: Promise<{ upgraded?: string }>;
 }) {
   const session = await auth();
-  if (!session?.user) redirect("/login");
+  if (!session?.user) redirect("/");
   const params = await searchParams;
 
   const properties = await prisma.property.findMany({
