@@ -6,7 +6,7 @@ export const authConfig = {
   trustHost: true,
   session: { strategy: "jwt" as const },
   pages: {
-    signIn: "/login",
+    signIn: "/",
   },
   callbacks: {
     authorized: () => true,
