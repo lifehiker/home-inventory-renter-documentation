@@ -11,7 +11,7 @@ export function middleware(request: NextRequest) {
     request.cookies.has("next-auth.session-token");
 
   if (!hasSession) {
-    return NextResponse.redirect(new URL("/login", request.url));
+    return NextResponse.redirect(new URL("/", request.url));
   }
   return NextResponse.next();
 }
