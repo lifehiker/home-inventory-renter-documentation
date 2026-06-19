@@ -1,5 +1,4 @@
 import { auth } from "@/auth";
-import { redirect } from "next/navigation";
 import Link from "next/link";
 import { SignOutButton } from "@/components/SignOutButton";
 
@@ -9,7 +8,22 @@ export default async function AppLayout({
   children: React.ReactNode;
 }) {
   const session = await auth();
-  if (!session?.user) redirect("/");
+  if (!session?.user) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
+        <div className="text-center">
+          <div className="w-12 h-12 bg-blue-700 rounded-xl flex items-center justify-center mx-auto mb-4">
+            <span className="text-white font-bold text-lg">D</span>
+          </div>
+          <h1 className="text-2xl font-bold text-gray-900 mb-2">Sign in to DepositSafe</h1>
+          <p className="text-gray-500 mb-6">Sign in to access your properties and documentation.</p>
+          <Link href="/login" className="bg-blue-700 text-white px-6 py-2.5 rounded-lg font-medium hover:bg-blue-800 transition-colors inline-block">
+            Sign in
+          </Link>
+        </div>
+      </div>
+    );
+  }
   const isPro = session.user.proUnlocked ?? false;
 
   return (

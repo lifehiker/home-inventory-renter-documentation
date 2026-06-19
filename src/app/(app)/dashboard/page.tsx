@@ -1,5 +1,4 @@
 import { auth } from "@/auth";
-import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import { PropertyCard } from "@/components/PropertyCard";
@@ -11,7 +10,7 @@ export default async function DashboardPage({
   searchParams: Promise<{ upgraded?: string }>;
 }) {
   const session = await auth();
-  if (!session?.user) redirect("/");
+  if (!session?.user) return null;
   const params = await searchParams;
 
   const properties = await prisma.property.findMany({
